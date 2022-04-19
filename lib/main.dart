@@ -66,6 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ValueListenableBuilder<int>(
               valueListenable: counter,
               builder: (context, value, _) => AnimatedContainer(
+                height: 100,
+                width: 100,
                 key: const ValueKey('first'),
                 duration: const Duration(seconds: 1),
                 color: value % 2 == 0 ? Colors.red : Colors.blue,
@@ -74,6 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ValueListenableBuilder<int>(
               valueListenable: counter,
               builder: (context, value, _) => AnimatedContainer(
+                height: 100,
+                width: 100,
                 key: const ValueKey('second'),
                 duration: const Duration(seconds: 1),
                 color: value % 2 == 1 ? Colors.red : Colors.blue,

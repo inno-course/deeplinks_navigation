@@ -5,6 +5,8 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inno_example/main.dart';
@@ -27,7 +29,7 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 
-  group('container changes color', () {
+  group('animated container', () {
     final containerFinder = find.byKey(const ValueKey('first'));
 
     testWidgets('exist', (WidgetTester tester) async {
@@ -54,6 +56,42 @@ void main() {
           .decoration as BoxDecoration;
 
       expect(decorationEnd.color, Colors.blue);
+    });
+
+    testWidgets('changes color with animation', (WidgetTester tester) async {
+      // Build our app and trigger a frame.
+      await tester.pumpWidget(const MyApp());
+
+      await expectLater(
+        containerFinder,
+        matchesGoldenFile('MyApp.color.even.png'),
+      );
+
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 250));
+      await expectLater(
+        containerFinder,
+        matchesGoldenFile('MyApp.color.even-to-odd-250.png'),
+      );
+
+      await tester.pump(const Duration(milliseconds: 250));
+      await expectLater(
+        containerFinder,
+        matchesGoldenFile('MyApp.color.even-to-odd-500.png'),
+      );
+
+      await tester.pump(const Duration(milliseconds: 250));
+      await expectLater(
+        containerFinder,
+        matchesGoldenFile('MyApp.color.even-to-odd-750.png'),
+      );
+
+      await tester.pump(const Duration(milliseconds: 250));
+      await expectLater(
+        containerFinder,
+        matchesGoldenFile('MyApp.color.odd.png'),
+      );
     });
   });
 }
