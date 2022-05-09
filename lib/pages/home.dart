@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text(title),
         actions: [
           IconButton(
-              onPressed: () => showAboutDialog(context: context),
+              onPressed: () => Router.of(context).routerDelegate.setNewRoutePath('/about'),
               icon: const Icon(Icons.account_balance_outlined)),
         ],
       ),
