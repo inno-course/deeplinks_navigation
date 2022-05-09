@@ -69,7 +69,7 @@ jobs:
         with:
           flutter-version: '2.10.5'
       - name: Build
-        run: flutter build web --base-href '/${{ github.base_ref }}'
+        run: flutter build web --base-href '/${{ github.base_ref }}/'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
