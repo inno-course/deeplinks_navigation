@@ -54,6 +54,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ matrix.flutter }}
+          cache: true
       - run: flutter build ${{ matrix.build }}
       - uses: actions/upload-artifact@v1
         if: ${{ matrix.target == 'android' }}
@@ -68,6 +69,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '2.10.5'
+          cache: true
       - name: Build
         run: flutter build web --base-href '/${{ github.base_ref }}/'
       - name: Deploy
